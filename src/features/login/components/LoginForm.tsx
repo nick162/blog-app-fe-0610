@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { useFormik } from "formik";
 import useLogin from "@/hooks/api/auth/useLogin";
 import { LoginSchema } from "../schema";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -62,6 +63,9 @@ export function LoginForm({
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
+                  <Link className="ml-32 text-sm" href="/forgot-password">
+                    Forgot Passowrd
+                  </Link>
                 </div>
                 <Input
                   id="password"

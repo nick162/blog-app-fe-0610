@@ -58,7 +58,7 @@ export function ForgotPasswordForm({
               </div>
 
               <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? "Loading" : "login"}
+                {isPending ? "Loading" : "Send Email"}
               </Button>
             </div>
           </form>
