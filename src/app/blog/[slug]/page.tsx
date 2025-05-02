@@ -1,5 +1,5 @@
+// "use client";
 import BlogDetailPage from "@/features/blog/BlogDetailPage";
-
 const BlogDetail = async ({
   params,
 }: {

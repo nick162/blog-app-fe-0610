@@ -5,13 +5,17 @@ import { format } from "date-fns";
 import Image from "next/image";
 import useDeleteBlog from "@/hooks/api/blogs/useDeleteBlog";
 import ModalDeletedBlog from "./ModalDeleteBlog";
-import { useAuthStore } from "@/store/auth";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { Edit } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface BlogHeaderProps {
   blog: Blog;
 }
 const BlogDetailHeader: FC<BlogHeaderProps> = ({ blog }) => {
-  const { user } = useAuthStore();
+  // const { user } = useAuthStore();
+  const session = useSession();
   const { mutateAsync: deleteBlog, isPending } = useDeleteBlog();
 
   const handleDeleteBlog = async () => {
@@ -35,8 +39,18 @@ const BlogDetailHeader: FC<BlogHeaderProps> = ({ blog }) => {
           <span className="capitalize">{blog.user?.name}</span>
         </p>
 
-        {user?.id == blog.userId && (
-          <ModalDeletedBlog isPending={isPending} onClick={handleDeleteBlog} />
+        {Number(session.data?.user?.id) == blog.userId && (
+          <div className="space-x-1">
+            <Link href={`/blog/${blog.slug}/edit`}>
+              <Button variant="outline" size="icon">
+                <Edit />
+              </Button>
+            </Link>
+            <ModalDeletedBlog
+              isPending={isPending}
+              onClick={handleDeleteBlog}
+            />
+          </div>
         )}
       </div>
       <div className="relative h-[300px]">

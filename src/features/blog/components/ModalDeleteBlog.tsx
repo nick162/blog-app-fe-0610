@@ -21,12 +21,11 @@ interface ModalDeleteBlogProps {
 const ModalDeletedBlog: FC<ModalDeleteBlogProps> = ({ onClick, isPending }) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger disabled={isPending}>
-        <Button variant="destructive" size={"icon"}>
-          {" "}
-          <Trash2 />
-        </Button>
-      </AlertDialogTrigger>
+      <Button variant="destructive" size={"icon"}>
+        {" "}
+        <Trash2 />
+      </Button>
+      <AlertDialogTrigger disabled={isPending}></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
