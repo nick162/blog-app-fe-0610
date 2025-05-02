@@ -1,14 +1,17 @@
 "use client";
 import { useAuthStore } from "@/store/auth";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const router = useRouter();
-  const { user, clearAuth } = useAuthStore();
+  // const { user, clearAuth } = useAuthStore();
+  const session = useSession();
 
   const logout = () => {
-    clearAuth();
+    // clearAuth();
+    signOut({ redirect: false });
     router.push("/login");
   };
   return (
@@ -23,7 +26,7 @@ const Navbar = () => {
             >
               Home
             </Link>
-            {!!user && (
+            {!!session.data?.user && (
               <Link
                 href="/write"
                 className="text-xl font-semibold hover:cursor-pointer"
@@ -31,7 +34,7 @@ const Navbar = () => {
                 Write
               </Link>
             )}
-            {user ? (
+            {session.data?.user ? (
               <p
                 onClick={logout}
                 className="text-xl font-semibold hover:cursor-pointer"
