@@ -28,6 +28,7 @@ interface EditBlogFormProps {
 }
 const EditBlogForm: FC<EditBlogFormProps> = ({ slug }) => {
   const { data: blog, isPending: isPendingGetBlog } = useGetBlogBySlug(slug);
+  console.log("ini adalah", blog);
   const { mutateAsync: updateBlog, isPending: isPendingUpdateBlog } =
     useUpdateBlog(blog?.id);
   const session = useSession();
